@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./App.css";
+import Header from "./Components/Header";
+import Img from "./Components/Img";
+import Text from "./Components/Text";
 
 function App() {
-  const [nasaData, setNasaData] = useState({});
+  const [nasaData, setNasaData] = useState([]);
 
   useEffect(() => {
     axios
@@ -13,12 +16,16 @@ function App() {
       .then((res) => {
         setNasaData(res.data);
       })
-      .catch((err) => {
-        console.error(err);
-      });
+      .catch((err) => {});
   }, []);
 
-  return <div className="App"></div>;
+  return (
+    <div className="App">
+      <Header />
+      <Img nasaData={nasaData} />
+      <Text nasaData={nasaData} />
+    </div>
+  );
 }
 
 export default App;
